@@ -2,7 +2,7 @@
     "name":"vicramgon/logicus",
     "summary" : "Elm packages for working with Propositional and First Order Logic algorithms.",
     "license":"BSD-3-Clause",
-    "version" : "1.0.1",
+    "version" : "1.0.0",
     "exposed-modules": {
         "Propositional Logic" : [
             "LogicUS.PL.SintaxSemantics",
