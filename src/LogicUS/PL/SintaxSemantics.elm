@@ -1,12 +1,12 @@
 module LogicUS.PL.SintaxSemantics exposing
-    ( PSymb, Interpretation
+    ( PSymb, FormulaPL(..), Literal, SetPL, Interpretation
     , fplIsLiteral, fplIsPositiveLiteral, fplIsNegativeLiteral, fplNegation, fplSymbols, fplFormTree, fplValuation, fplInterpretations, fplModels, fplCountermodels, fplModelsCountermodels, fplTruthTable, fplSatisfiability, fplValidity
     , splSymbols, splValuation, splInterpretations, splModels, splCountermodels, splModelsCountermodels, splTruthTable, splSatisfiability, splUnsatisfiability, logicalConsecuence, logicalConsecuence2
     , fplReadFromString, fplReadExtraction, fplToInputString
     , fplToString, fplToMathString, fplTruthTableString, fplTruthTableMathString, fplFormTreeToString, fplFormTreeToDOT
     , splToString, splToMathString, splTruthTableString, splTruthTableMathString
     , interpretationsFromSymbolsAndLiterals
-    , FormulaPL(..), Literal, SetPL, fplUnsatisfiability
+    , fplUnsatisfiability
     )
 
 {-| The module provides the elementary tools for working with propositional logic. It allows defining both formulas and sets as well as performing some basic operations on them, such as evaluations regarding interpretations, construction of truth tables, extraction of models and decision of satisfaction, tautology and logical consequence.
@@ -14,7 +14,7 @@ module LogicUS.PL.SintaxSemantics exposing
 
 # Definition Types
 
-@docs PSymb, FormulaPL PLSet, Interpretation
+@docs PSymb, FormulaPL, Literal, SetPL, Interpretation
 
 
 # Work with PL Formulas

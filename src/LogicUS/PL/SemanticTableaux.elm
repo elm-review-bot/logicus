@@ -1,9 +1,9 @@
 module LogicUS.PL.SemanticTableaux exposing
     ( FormulaPLType, PLSemanticTableau
     , fplType, fplComponents
-    , splAllLiterals, splSearchContradiction, splSearchDN, splSearchAlpha, splSearchBeta, splExpandDN, splExpandAlpha, splExpandBeta, splSemanticTableau
-    , plSemanticTableauToString, plSemanticTableauToDOT
-    , plSemanticTableauModels
+    , splAllLiterals, splSearchContradiction, splSearchDN, splSearchAlpha, splSearchBeta, splExpandDN, splExpandAlpha, splExpandBeta
+    , semanticTableau, semanticTableauModels
+    , semanticTableauToString, semanticTableauToDOT
     )
 
 {-| The module provides the elementary tools for building the semantic tableau of a set of PL formulas.
@@ -14,19 +14,24 @@ module LogicUS.PL.SemanticTableaux exposing
 @docs FormulaPLType, PLSemanticTableau
 
 
-# Functions for PL Formulas
+# Formulas types and components
 
 @docs fplType, fplComponents
 
 
-# Functions for Set of PL Formulas
+# Semantic Tableau operations
 
-@docs splAllLiterals, splSearchContradiction, splSearchDN, splSearchAlpha, splSearchBeta, splExpandDN, splExpandAlpha, splExpandBeta, splSemanticTableau
+@docs splAllLiterals, splSearchContradiction, splSearchDN, splSearchAlpha, splSearchBeta, splExpandDN, splExpandAlpha, splExpandBeta
+
+
+# Semantic Tableau algorithm and models
+
+@docs semanticTableau, semanticTableauModels
 
 
 # Fuctions for representation
 
-@docs plSemanticTableauToString, plSemanticTableauToDOT
+@docs semanticTableauToString, semanticTableauToDOT
 
 -}
 
@@ -349,8 +354,8 @@ splExpandBeta fs f =
     splSemanticTableau fs4 == Graph (Inner { left = Leaf { key = 0, value = { incoming = Empty, node = { id = 0, label = ( 0, [ Atom "a", Neg (Atom "b"), Conj (Atom "a") (Atom "b"), Disj (Atom "a") (Atom "b"), Neg (Equi (Atom "a") (Atom "b")) ] ) }, outgoing = Leaf { key = 1, value = ( A, [ 2 ] ) } } }, prefix = { branchingBit = 1, prefixBits = 0 }, right = Leaf { key = 1, value = { incoming = Leaf { key = 0, value = ( A, [ 2 ] ) }, node = { id = 1, label = ( -1, [ Atom "a", Neg (Atom "b"), Disj (Atom "a") (Atom "b"), Neg (Equi (Atom "a") (Atom "b")), Atom "b" ] ) }, outgoing = Empty } }, size = 2 })
 
 -}
-splSemanticTableau : SetPL -> PLSemanticTableau
-splSemanticTableau fs =
+semanticTableau : SetPL -> PLSemanticTableau
+semanticTableau fs =
     let
         splSemanticTableauBuilder xs nid =
             let
@@ -425,8 +430,8 @@ splSemanticTableau fs =
     splSemanticTableau fs5 |> plSemanticTableauModels == [["a"],["b"]]
 
 -}
-plSemanticTableauModels : PLSemanticTableau -> List Interpretation
-plSemanticTableauModels st =
+semanticTableauModels : PLSemanticTableau -> List Interpretation
+semanticTableauModels st =
     let
         symbs =
             (Maybe.withDefault (Node 0 ( 0, [] )) <| List.head <| Graph.nodes st).label |> Tuple.second |> PL_SS.splSymbols
@@ -458,8 +463,8 @@ plSemanticTableauModels st =
     splSemanticTableau fs4 |> splSemanticTableauToString == "Graph [Node 0 ({a, ¬ b, ( a ∧ b ), ( a ∨ b ), ¬ ( a ↔ b )}), Node 1 ({a, ¬ b, ( a ∨ b ), ¬ ( a ↔ b ), b}), Node 2 (×)] [Edge 1->2 (I (2, 5)), Edge 0->1 (α (3))]"
 
 -}
-plSemanticTableauToString : PLSemanticTableau -> String
-plSemanticTableauToString t =
+semanticTableauToString : PLSemanticTableau -> String
+semanticTableauToString t =
     let
         toStringNode =
             \( i, fs2 ) ->
@@ -528,8 +533,8 @@ plSemanticTableauToString t =
     splSemanticTableau fs4 |> splSemanticTableauToDOT == "digraph G {\n  rankdir=TB\n  graph []\n  node [shape=box, color=black]\n  edge [dir=none, color=blue, fontcolor=blue]\n\n  0 -> 1 [label=\"α (3)\"]\n  1 -> 2 [label=\"I (2, 5)\"]\n\n  0 [label=\"{a, ¬ b, ( a ∧ b ), ( a ∨ b ), ¬ ( a ↔ b )}\"]\n  1 [label=\"{a, ¬ b, ( a ∨ b ), ¬ ( a ↔ b ), b}\"]\n  2 [label=\"×\"]\n}"
 
 -}
-plSemanticTableauToDOT : PLSemanticTableau -> String
-plSemanticTableauToDOT t =
+semanticTableauToDOT : PLSemanticTableau -> String
+semanticTableauToDOT t =
     let
         toStringNode =
             \( i, fs2 ) ->

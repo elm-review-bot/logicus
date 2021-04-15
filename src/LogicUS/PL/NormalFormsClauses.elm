@@ -3,7 +3,7 @@ module LogicUS.PL.NormalFormsClauses exposing
     , ClausePL, ClausePLSet, cplIsPositive, cplIsNegative, cplEqClauses, cplSubsumes, cplIsTautology, csplRemoveEqClauses, csplRemoveTautClauses, csplRemoveSubsumedClauses, cplSymbols, csplSymbols, cplInterpretations, csplInterpretations, cplValuation, csplValuation, cplModels, csplModels, cplIsInsat, csplIsTaut, csplIsSat, cplSetIsInsat
     , cplFromCNF, fplToClauses, splToClauses
     , cplReadFromString, cplReadExtraction, cplToInputString
-    , cplToMathString, cplToString, csplToMathString, csplToString
+    , cplToString, cplToMathString, csplToString, csplToMathString
     )
 
 {-| The module provides the tools for express formulas in their NN, CNF, DNF and Clausal Form.
@@ -31,7 +31,7 @@ module LogicUS.PL.NormalFormsClauses exposing
 
 # Clauses Representation
 
-cplToString, cplToMathString, csplToString, csplToMathString
+@docs cplToString, cplToMathString, csplToString, csplToMathString
 
 -}
 

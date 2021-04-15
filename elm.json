@@ -3,13 +3,15 @@
     "summary" : "Elm packages for working with Propositional and First Order Logic algorithms.",
     "license":"BSD-3-Clause",
     "version" : "1.0.0",
-    "exposed-modules": [
-        "LogicUS.PL.SintaxSemantics",
-        "LogicUS.PL.SemanticTableaux",
-        "LogicUS.PL.NormalFormsClauses",
-        "LogicUS.PL.DavisPutnamLogemannLovelan",
-        "LogicUS.PL.ResolutionStrategies"
-    ],
+    "exposed-modules": {
+        "Propositional Logic" : [
+            "LogicUS.PL.SintaxSemantics",
+            "LogicUS.PL.SemanticTableaux",
+            "LogicUS.PL.NormalFormsClauses",
+            "LogicUS.PL.DavisPutnamLogemannLovelan",
+            "LogicUS.PL.ResolutionStrategies"
+        ]
+        },
     "elm-version": "0.19.1 <= v < 0.20.0",
     "dependencies": {
             "elm/browser": "1.0.2 <= v < 2.0.0",
