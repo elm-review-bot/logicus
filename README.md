@@ -16,11 +16,11 @@ The _LogicUS.PL_ packages allow the definition of formulas and propositional set
 
 - **_LogicUS.PL.SemanticTableaux_**: It develops all the necessary tools for working with semantic boards, distinguishing the different types of formulas and rules and also allowing the visualization of the complete board.
 
-- **_LogicUS.PL.NormalFormsClauses_**: It contains the functions necessary for the transformation of formulas into normal forms (negative, conjunctive and disjunctive). It also provides some functions that allow work with propositional clauses, definition, operations, transformation of formulas and sets into clausal sets, ...
+- **_LogicUS.PL.NFC_**: It contains the functions necessary for the transformation of formulas into normal forms (negative, conjunctive and disjunctive). It also provides some functions that allow work with propositional clauses, definition, operations, transformation of formulas and sets into clausal sets, ...
 
-- **_LogicUS.PL.DavisPutnamLogemannLovelan_**: It defines the functions necessary for the application of the DPLL solving algorithm to sets of propositional clauses as well as the search for models, based on this technique. Also, it allows the visualization of the complete board.
+- **_LogicUS.PL.DPLL_**: It defines the functions necessary for the application of the DPLL solving algorithm to sets of propositional clauses as well as the search for models, based on this technique. Also, it allows the visualization of the complete board.
 
-- **_LogicUS.PL.ResolutionStrategies_**: Define the functions for working with the resolution algorithms implementing different strategies: saturation, regular, best first, linear, positive, negative, unitary, by inputs, ...
+- **_LogicUS.PL.Resolution_**: Define the functions for working with the resolution algorithms implementing different strategies: saturation, regular, best first, linear, positive, negative, unitary, by inputs, ...
 
 ### First Order Logic
 

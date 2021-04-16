@@ -1,4 +1,4 @@
-module LogicUS.PL.ResolutionStrategies exposing
+module LogicUS.PL.Resolution exposing
     ( ResolutionTableau
     , cplResolventByPSymb, cplAllResolvents, csplAllResolventsByPsymb, csplResolventsByClause, csplAllResolvents
     , csplSaturationResolution, csplRegularResolution
