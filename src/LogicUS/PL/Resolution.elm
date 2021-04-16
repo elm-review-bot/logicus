@@ -45,7 +45,7 @@ import Dict exposing (Dict)
 import Graph exposing (Edge, Graph, Node)
 import Graph.DOT exposing (defaultStyles)
 import List.Extra as LE
-import LogicUS.PL.NormalFormsClauses as PL_NFC exposing (ClausePL)
+import LogicUS.PL.NFC as PL_NFC exposing (ClausePL)
 import LogicUS.PL.SintaxSemantics as PL_SS exposing (FormulaPL(..), Literal, PSymb)
 
 

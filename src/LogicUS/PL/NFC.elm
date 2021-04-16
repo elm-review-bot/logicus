@@ -1,4 +1,4 @@
-module LogicUS.PL.NormalFormsClauses exposing
+module LogicUS.PL.NFC exposing
     ( fplContainsEquiv, fplRemoveAllEquiv, fplContainsImpl, fplRemoveAllImpl, fplInteriorizeAllNeg, fplInteriorizeAllDisj, fplInteriorizeAllConj, fplToNNF, fplToCNF, fplToDNF
     , ClausePL, ClausePLSet, cplIsPositive, cplIsNegative, cplEqClauses, cplSubsumes, cplIsTautology, csplRemoveEqClauses, csplRemoveTautClauses, csplRemoveSubsumedClauses, cplSymbols, csplSymbols, cplInterpretations, csplInterpretations, cplValuation, csplValuation, cplModels, csplModels, cplIsInsat, csplIsTaut, csplIsSat, cplSetIsInsat
     , cplFromCNF, fplToClauses, splToClauses

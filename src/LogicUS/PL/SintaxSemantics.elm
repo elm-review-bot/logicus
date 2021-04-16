@@ -177,6 +177,37 @@ fromListToTableString xss =
 
 
 
+-- It generates the string of a list of string lists as an array environment in Latex.
+
+
+fromListToTableLatex : String -> List (List String) -> List (List String) -> List (List String) -> String
+fromListToTableLatex cols head body foot =
+    let
+        thead =
+            if List.isEmpty head then
+                ""
+
+            else
+                (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\mathbf{" ++ x ++ "}") xs) ++ " \\\\") head) ++ "\\hline \n"
+
+        tbody =
+            if List.isEmpty body then
+                ""
+
+            else
+                (String.join " \n" <| List.map (\xs -> String.join " & " xs ++ " \\\\") body) ++ "\\hline \n"
+
+        tfoot =
+            if List.isEmpty foot then
+                ""
+
+            else
+                (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\color{grey}{" ++ x ++ "}") xs) ++ "\\\\") foot) ++ "\\hline \n"
+    in
+    "\\begin{array}{" ++ cols ++ "}\\hline \n" ++ thead ++ tbody ++ tfoot ++ "\\end{array}"
+
+
+
 -----------------------
 -- Calc functions -
 -----------------------
@@ -1098,9 +1129,9 @@ fplTruthTableString f =
 
 {-| It generates the Latex code of a Truth Table of a PL formula. The result requires a math enviroment to be displayed.
 
-    fplTruthTableMathString f1 == "\\begin{array}{c|c|c|}\n\n\\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( a\\rightarrow b \\right)} \\\\\\hlineF & F & T \\\\ \nF & T & T \\\\ \nT & F & F \\\\ \nT & T & T \\\\\\Parser.end{array}"
+    fplTruthTableMathString f1 == "\\begin{array}{c|c|c|}\n\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( a\\rightarrow b \\right)} \\\\ \\hline \nF & F & T \\\\ \nF & T & T \\\\ \nT & F & F \\\\ \nT & T & T \\\\ \\end{array}"
 
-    fplTruthTableMathString f2 == "\\begin{array}{c|c|c|}\n\n\\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( \\neg \\left( a \\wedge b \\right)\\leftrightarrow \\left( \\neg a \\vee \\neg b \\right) \\right)} \\\\\\hlineF & F & T \\\\ \nF & T & T \\\\ \nT & F & T \\\\ \nT & T & T \\\\\\Parser.end{array}"
+    fplTruthTableMathString f2 == "\\begin{array}{c|c|c|}\n\n\\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( \\neg \\left( a \\wedge b \\right)\\leftrightarrow \\left( \\neg a \\vee \\neg b \\right) \\right)} \\\\\\hlineF & F & T \\\\ \nF & T & T \\\\ \nT & F & T \\\\ \nT & T & T \\\\ \\end{array}"
 
 -}
 fplTruthTableMathString : FormulaPL -> String
@@ -1111,31 +1142,6 @@ fplTruthTableMathString f =
 
         symbs =
             fplSymbols f
-
-        fromListToTableLatex cols head body foot =
-            let
-                thead =
-                    if List.isEmpty head then
-                        ""
-
-                    else
-                        "\n" ++ (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\mathbf{" ++ x ++ "}") xs) ++ " \\\\") head) ++ "\\hline"
-
-                tbody =
-                    if List.isEmpty body then
-                        ""
-
-                    else
-                        String.join " \n" <| List.map (\xs -> String.join " & " xs ++ " \\\\") body
-
-                tfoot =
-                    if List.isEmpty foot then
-                        ""
-
-                    else
-                        "\\hline" ++ (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\color{grey}{" ++ x ++ "}") xs) ++ "\\\\") foot)
-            in
-            "\\begin{array}{" ++ cols ++ "}\n" ++ thead ++ tbody ++ tfoot ++ "\\Parser.end{array}"
     in
     let
         head =
@@ -1162,7 +1168,7 @@ fplTruthTableMathString f =
                 )
                 tableEnters
     in
-    fromListToTableLatex (String.repeat (List.length symbs + 1) "c|") [ head ] body []
+    fromListToTableLatex ("|" ++ String.repeat (List.length symbs + 1) "c|") [ head ] body []
 
 
 {-| It generates the Truth Table of a set of PL formulas as a string using CSV format.
@@ -1219,7 +1225,7 @@ splTruthTableString fs =
 {-| It generates the Latex code of a Truth Table of Set of PL formulas. The result requires a math enviroment to be displayed.
 
     splTruthTableMathString [ f1, f2 ] =
-        "\\begin{array}{c|c|c|c|c|}\n\n\\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( a\\rightarrow b \\right)} & \\mathbf{\\left( \\neg \\left( a \\wedge b \\right)\\leftrightarrow \\left( \\neg a \\vee \\neg b \\right) \\right)} & \\mathbf{U} \\\\\\hlineF & F & T & T & T \\\\ \nF & T & T & T & T \\\\ \nT & F & F & T & F \\\\ \nT & T & T & T & T \\\\\\Parser.end{array}"
+        "\\begin{array}{c|c|c|c|c|}\\mathbf{a} & \\mathbf{b} & \\mathbf{\\left( a\\rightarrow b \\right)} & \\mathbf{\\left( \\neg \\left( a \\wedge b \\right)\\leftrightarrow \\left( \\neg a \\vee \\neg b \\right) \\right)} & \\mathbf{U} \\\\ \\hlineF & F & T & T & T \\\\ F & T & T & T & T \\\\ T & F & F & T & F \\\\ T & T & T & T & T \\\\ \\end{array}"
 
 -}
 splTruthTableMathString : SetPL -> String
@@ -1230,31 +1236,6 @@ splTruthTableMathString fs =
 
         symbs =
             splSymbols fs
-
-        fromListToTableLatex cols head body foot =
-            let
-                thead =
-                    if List.isEmpty head then
-                        ""
-
-                    else
-                        "\n" ++ (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\mathbf{" ++ x ++ "}") xs) ++ " \\\\") head) ++ "\\hline"
-
-                tbody =
-                    if List.isEmpty body then
-                        ""
-
-                    else
-                        String.join " \n" <| List.map (\xs -> String.join " & " xs ++ " \\\\") body
-
-                tfoot =
-                    if List.isEmpty foot then
-                        ""
-
-                    else
-                        "\\hline" ++ (String.join " \n" <| List.map (\xs -> String.join " & " (List.map (\x -> "\\color{grey}{" ++ x ++ "}") xs) ++ "\\\\") foot)
-            in
-            "\\begin{array}{" ++ cols ++ "}\n" ++ thead ++ tbody ++ tfoot ++ "\\Parser.end{array}"
     in
     let
         head =

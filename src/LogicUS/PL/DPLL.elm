@@ -1,4 +1,4 @@
-module LogicUS.PL.DavisPutnamLogemannLovelan exposing
+module LogicUS.PL.DPLL exposing
     ( DPLLTableau
     , dpll, dpllTableauModels
     , dpllTableauToString, dpllTableauToDOT
@@ -31,7 +31,7 @@ import Graph exposing (Edge, Graph, Node)
 import Graph.DOT exposing (defaultStyles)
 import IntDict
 import List.Extra as LE
-import LogicUS.PL.NormalFormsClauses as PL_NFC exposing (ClausePL)
+import LogicUS.PL.NFC as PL_NFC exposing (ClausePL)
 import LogicUS.PL.SintaxSemantics as PL_SS exposing (FormulaPL(..), Interpretation, Literal, PSymb, fplSymbols)
 
 

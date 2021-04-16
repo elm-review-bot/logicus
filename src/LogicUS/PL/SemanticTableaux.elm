@@ -166,17 +166,27 @@ fplType f =
 
 {-| It gives the components of a formula for using them in the semantic board (Auxiliar)
 
-fplComponents f1 == [Atom "a"]
-fplComponents (Neg f1) == [Neg (Atom "a")]
-fplComponents (Neg (Neg f1)) == [Atom "a"]
-fplComponents (Conj f1 f2) == [Atom "a",Atom "b"]
-fplComponents (Disj f1 f2) == [Atom "a",Atom "b"]
-fplComponents (Impl f1 f2) == [Neg (Atom "a"),Atom "b"]
-fplComponents (Equi f1 f2) == [Impl (Atom "a") (Atom "b"),Impl (Atom "b") (Atom "a")]
-fplComponents (Neg (Conj f1 f2)) == [Neg (Atom "a"),Neg (Atom "b")]
-fplComponents (Neg (Disj f1 f2)) == [Neg (Atom "a"),Neg (Atom "b")]
-fplComponents (Neg (Impl f1 f2)) == [Atom "a",Neg (Atom "b")]
-fplComponents (Neg (Equi f1 f2)) == [Neg (Impl (Atom "a") (Atom "b")),Neg (Impl (Atom "b") (Atom "a"))]
+    fplComponents f1 == [ Atom "a" ]
+
+    fplComponents (Neg f1) == [ Neg (Atom "a") ]
+
+    fplComponents (Neg (Neg f1)) == [ Atom "a" ]
+
+    fplComponents (Conj f1 f2) == [ Atom "a", Atom "b" ]
+
+    fplComponents (Disj f1 f2) == [ Atom "a", Atom "b" ]
+
+    fplComponents (Impl f1 f2) == [ Neg (Atom "a"), Atom "b" ]
+
+    fplComponents (Equi f1 f2) == [ Impl (Atom "a") (Atom "b"), Impl (Atom "b") (Atom "a") ]
+
+    fplComponents (Neg (Conj f1 f2)) == [ Neg (Atom "a"), Neg (Atom "b") ]
+
+    fplComponents (Neg (Disj f1 f2)) == [ Neg (Atom "a"), Neg (Atom "b") ]
+
+    fplComponents (Neg (Impl f1 f2)) == [ Atom "a", Neg (Atom "b") ]
+
+    fplComponents (Neg (Equi f1 f2)) == [ Neg (Impl (Atom "a") (Atom "b")), Neg (Impl (Atom "b") (Atom "a")) ]
 
 -}
 fplComponents : FormulaPL -> SetPL

@@ -1,15 +1,16 @@
 {   "type": "package",
-    "name":"vicramgon/logicus",
+    "name":"vicramgon/elm-logicus",
     "summary" : "Elm packages for working with Propositional and First Order Logic algorithms.",
     "license":"BSD-3-Clause",
-    "version" : "1.0.0",
+    "version" : "2.0.0",
+    "source-directories": ["src"],
     "exposed-modules": {
         "Propositional Logic" : [
             "LogicUS.PL.SintaxSemantics",
             "LogicUS.PL.SemanticTableaux",
-            "LogicUS.PL.NormalFormsClauses",
-            "LogicUS.PL.DavisPutnamLogemannLovelan",
-            "LogicUS.PL.ResolutionStrategies"
+            "LogicUS.PL.NFC",
+            "LogicUS.PL.DPLL",
+            "LogicUS.PL.Resolution"
         ]
         },
     "elm-version": "0.19.1 <= v < 0.20.0",
