@@ -1,12 +1,11 @@
 module LogicUS.PL.SintaxSemantics exposing
     ( PSymb, FormulaPL(..), Literal, SetPL, Interpretation
-    , fplIsLiteral, fplIsPositiveLiteral, fplIsNegativeLiteral, fplNegation, fplSymbols, fplFormTree, fplValuation, fplInterpretations, fplModels, fplCountermodels, fplModelsCountermodels, fplTruthTable, fplSatisfiability, fplValidity
+    , fplIsLiteral, fplIsPositiveLiteral, fplIsNegativeLiteral, fplNegation, fplSymbols, fplFormTree, fplValuation, fplInterpretations, fplModels, fplCountermodels, fplModelsCountermodels, fplTruthTable, fplSatisfiability, fplValidity, fplUnsatisfiability
     , splSymbols, splValuation, splInterpretations, splModels, splCountermodels, splModelsCountermodels, splTruthTable, splSatisfiability, splUnsatisfiability, logicalConsecuence, logicalConsecuence2
     , fplReadFromString, fplReadExtraction, fplToInputString
     , fplToString, fplToMathString, fplTruthTableString, fplTruthTableMathString, fplFormTreeToString, fplFormTreeToDOT
     , splToString, splToMathString, splTruthTableString, splTruthTableMathString
     , interpretationsFromSymbolsAndLiterals
-    , fplUnsatisfiability
     )
 
 {-| The module provides the elementary tools for working with propositional logic. It allows defining both formulas and sets as well as performing some basic operations on them, such as evaluations regarding interpretations, construction of truth tables, extraction of models and decision of satisfaction, tautology and logical consequence.
@@ -19,7 +18,7 @@ module LogicUS.PL.SintaxSemantics exposing
 
 # Work with PL Formulas
 
-@docs fplIsLiteral, fplIsPositiveLiteral, fplIsNegativeLiteral, fplNegation, fplSymbols, fplFormTree, fplValuation, fplInterpretations, fplModels, fplCountermodels, fplModelsCountermodels, fplTruthTable, fplSatisfiability, fplValidity, fplUnsatisfiability.
+@docs fplIsLiteral, fplIsPositiveLiteral, fplIsNegativeLiteral, fplNegation, fplSymbols, fplFormTree, fplValuation, fplInterpretations, fplModels, fplCountermodels, fplModelsCountermodels, fplTruthTable, fplSatisfiability, fplValidity, fplUnsatisfiability
 
 
 # Work with PL Sets
@@ -575,7 +574,7 @@ splValuation fs i =
 -}
 fplInterpretations : FormulaPL -> List Interpretation
 fplInterpretations f =
-    powerset <| fplSymbols f
+    List.sort <| List.map List.sort <| powerset <| fplSymbols f
 
 
 {-| It gives all possible interpretations of a set of formulas.
@@ -1086,7 +1085,7 @@ splToMathString fs =
 
 {-| It generates the Truth Table of a PL formula as a string using CSV format (separated by ';')
 
-    fplTruthTableString f1 == ""a ; b ; ( a → b ) \nF ; F ; T \nF ; T ; T \nT ; F ; F \nT ; T ; T""
+    fplTruthTableString f1 == "a ; b ; ( a → b ) \nF ; F ; T \nF ; T ; T \nT ; F ; F \nT ; T ; T""
     fplTruthTableString f2 == "a ; b ; ( ¬ ( a ∧ b ) ↔ ( ¬ a ∨ ¬ b ) ) \nF ; F ; T \nF ; T ; T \nT ; F ; T \nT ; T ; T"
 
 -}
